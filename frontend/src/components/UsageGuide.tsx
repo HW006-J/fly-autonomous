@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 const GUIDE_STEPS = [
   {
     n: "1",
@@ -30,24 +32,26 @@ export function UsageGuide() {
   return (
     <section className="border-t border-white/10 bg-white/[0.02] px-6 py-20">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-center text-2xl font-bold text-slate-50 sm:text-3xl">
-          How to use it
-        </h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-slate-400">
-          No training needed — everything below is the entire operating manual.
-        </p>
+        <Reveal className="text-center">
+          <h2 className="text-2xl font-bold text-slate-50 sm:text-3xl">How to use it</h2>
+          <p className="mx-auto mt-3 max-w-xl text-slate-400">
+            No training needed — everything below is the entire operating manual.
+          </p>
+        </Reveal>
 
         <ol className="mt-12 space-y-6">
-          {GUIDE_STEPS.map((step) => (
-            <li key={step.n} className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-sky-500/30 bg-sky-500/10 font-mono text-sm text-sky-400">
-                {step.n}
-              </div>
-              <div>
-                <div className="font-semibold text-slate-100">{step.title}</div>
-                <p className="mt-1 text-sm leading-relaxed text-slate-400">{step.body}</p>
-              </div>
-            </li>
+          {GUIDE_STEPS.map((step, i) => (
+            <Reveal key={step.n} delay={i * 0.07}>
+              <li className="group flex gap-4">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-sky-500/30 bg-sky-500/10 font-mono text-sm text-sky-400 transition group-hover:border-sky-400/60 group-hover:bg-sky-500/20">
+                  {step.n}
+                </div>
+                <div>
+                  <div className="font-semibold text-slate-100">{step.title}</div>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-400">{step.body}</p>
+                </div>
+              </li>
+            </Reveal>
           ))}
         </ol>
       </div>

@@ -1,4 +1,6 @@
 import type { AirportWithStatus } from "../lib/types";
+import { Reveal } from "./Reveal";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 export function ProofStats({ airports }: { airports: AirportWithStatus[] }) {
   const reporting = airports.filter((a) => a.risk).length;
@@ -16,11 +18,13 @@ export function ProofStats({ airports }: { airports: AirportWithStatus[] }) {
   return (
     <section className="border-t border-white/10 px-6 py-14">
       <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 sm:grid-cols-5">
-        {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <div className="text-3xl font-bold text-slate-50 sm:text-4xl">{s.value}</div>
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 0.06} className="text-center">
+            <div className="text-3xl font-bold text-slate-50 sm:text-4xl">
+              <AnimatedNumber value={s.value} />
+            </div>
             <div className="mt-1 text-xs uppercase tracking-wide text-slate-500">{s.label}</div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>

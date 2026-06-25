@@ -14,11 +14,11 @@ export function StatsBar({ airports }: { airports: AirportWithStatus[] }) {
   }
 
   return (
-    <div className="flex items-center gap-3 text-sm">
+    <div className="flex flex-wrap items-center gap-3 text-sm">
       {LEVELS.map((level) => (
         <div
           key={level}
-          className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5"
+          className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 transition hover:scale-105 hover:bg-white/10"
         >
           <span
             className="h-2 w-2 rounded-full"

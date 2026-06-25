@@ -53,7 +53,7 @@ function App() {
       <PoweredBy />
       <FinalCta />
 
-      <section id="dashboard" className="flex h-screen flex-col border-t border-white/10">
+      <section id="dashboard" className="flex min-h-screen flex-col border-t border-white/10 lg:h-screen">
         <header className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-5 py-3">
           <div className="flex items-center gap-3">
             <div className="text-lg font-semibold tracking-tight">🛫 OTP Sentinel</div>
@@ -71,7 +71,7 @@ function App() {
               type="button"
               onClick={enableNotifications}
               disabled={notificationsEnabled}
-              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-200 transition hover:scale-105 hover:bg-white/10 disabled:cursor-default disabled:opacity-60 disabled:hover:scale-100"
             >
               {notificationsEnabled ? "🔔 Alerts on" : "🔕 Enable alerts"}
             </button>
@@ -79,9 +79,16 @@ function App() {
               type="button"
               onClick={handleRefresh}
               disabled={refreshing}
-              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10 disabled:opacity-50"
+              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-200 transition hover:scale-105 hover:bg-white/10 disabled:opacity-50 disabled:hover:scale-100"
             >
-              {refreshing ? "Refreshing…" : "↻ Refresh"}
+              {refreshing ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-3 w-3 animate-spin rounded-full border-2 border-slate-400/30 border-t-slate-200" />
+                  Refreshing…
+                </span>
+              ) : (
+                "↻ Refresh"
+              )}
             </button>
             {lastRefreshed && (
               <span className="text-xs text-slate-500">
@@ -100,14 +107,14 @@ function App() {
             Loading airport data…
           </div>
         ) : (
-          <div className="flex flex-1 overflow-hidden">
-            <div className="relative w-[58%] border-r border-white/10">
+          <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
+            <div className="relative h-[60vh] w-full border-b border-white/10 lg:h-auto lg:w-[58%] lg:border-b-0 lg:border-r">
               <MapView airports={airports} selectedIcao={selectedIcao} onSelect={setSelectedIcao} />
             </div>
-            <div className="w-[24%] border-r border-white/10 p-3">
+            <div className="h-[60vh] w-full border-b border-white/10 p-3 lg:h-auto lg:w-[24%] lg:border-b-0 lg:border-r">
               <AirportTable airports={airports} selectedIcao={selectedIcao} onSelect={setSelectedIcao} />
             </div>
-            <div className="w-[18%]">
+            <div className="w-full lg:w-[18%]">
               <DetailPanel airport={selected} onClose={() => setSelectedIcao(null)} />
             </div>
           </div>

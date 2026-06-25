@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+}
+
 :root {
   color-scheme: dark;
 }
@@ -15,7 +20,7 @@ body,
   min-height: 100%;
   background: #05070d;
   color: #e2e8f0;
-  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
 }
 
 @keyframes risk-pulse {
@@ -56,4 +61,58 @@ body,
 .maplibregl-popup-tip {
   border-top-color: #0f1420 !important;
   border-bottom-color: #0f1420 !important;
+}
+
+@keyframes aurora-drift-1 {
+  0%,
+  100% {
+    transform: translate(-10%, -10%) scale(1);
+  }
+  50% {
+    transform: translate(10%, 5%) scale(1.15);
+  }
+}
+
+@keyframes aurora-drift-2 {
+  0%,
+  100% {
+    transform: translate(8%, 8%) scale(1.1);
+  }
+  50% {
+    transform: translate(-12%, -6%) scale(0.95);
+  }
+}
+
+@keyframes aurora-drift-3 {
+  0%,
+  100% {
+    transform: translate(0%, 10%) scale(1);
+  }
+  50% {
+    transform: translate(6%, -10%) scale(1.2);
+  }
+}
+
+.aurora-1 {
+  animation: aurora-drift-1 18s ease-in-out infinite;
+}
+
+.aurora-2 {
+  animation: aurora-drift-2 22s ease-in-out infinite;
+}
+
+.aurora-3 {
+  animation: aurora-drift-3 26s ease-in-out infinite;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 100%);
+}
+
+.text-glow-sky {
+  text-shadow: 0 0 40px rgba(56, 189, 248, 0.35);
 }

@@ -108,7 +108,7 @@ export function AirportTable({
               <tr
                 key={row.id}
                 onClick={() => onSelect(row.original.icao)}
-                className={`cursor-pointer border-t border-white/5 hover:bg-white/5 ${
+                className={`cursor-pointer border-t border-white/5 transition-colors hover:bg-white/5 ${
                   row.original.icao === selectedIcao ? "bg-sky-500/10" : ""
                 }`}
               >

@@ -9,13 +9,15 @@ const PULSE_CLASS: Record<RiskLevel, string> = {
 };
 
 export function RiskBadge({ level, score }: { level: RiskLevel; score?: number }) {
+  const glow = level === "HIGH" || level === "SEVERE";
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide ${PULSE_CLASS[level]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide transition-transform hover:scale-105 ${PULSE_CLASS[level]}`}
       style={{
         color: RISK_COLORS[level],
         backgroundColor: `${RISK_COLORS[level]}1a`,
         border: `1px solid ${RISK_COLORS[level]}55`,
+        boxShadow: glow ? `0 0 14px -2px ${RISK_COLORS[level]}66` : undefined,
       }}
     >
       <span
